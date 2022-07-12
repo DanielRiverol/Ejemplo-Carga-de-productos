@@ -14,8 +14,19 @@ class Producto {
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.precio = precio;
-    this.img = img;
+    if (img == "") {
+      this.img = "https://via.placeholder.com/150";
+    } else {
+      this.img = img;
+    }
   }
+}
+
+function limpiarCampos() {
+  inputNombre.value = "";
+  inputDescripcion.value = "";
+  inputPrecio.value = "";
+  inputImg.value = "";
 }
 function crearProducto(nombre, descripcion, precio, img) {
   nombre = inputNombre.value;
@@ -46,16 +57,18 @@ function crearHTML() {
     <p>$${producto.precio}</p>
   </div>
   <div class="card-action">
-    <a href="#" class="btn">Comprar</a>
+    <input type= "button" class="btn" id=${producto.id} value="Comprar" >
   </div>
   </div>
   </div>`;
+
     //console.log(productos);
   }
   contenedor.innerHTML += html;
+  limpiarCampos();
 }
 btnGuardar.addEventListener("click", () => {
   const product = crearProducto(nombre, descripcion, precio, img);
   guardarProducto(product);
-  crearHTML(productos);
+  crearHTML();
 });
